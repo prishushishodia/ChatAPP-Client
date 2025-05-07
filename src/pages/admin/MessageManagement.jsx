@@ -89,6 +89,7 @@ const columns = [
 
 const MessageManagement = () => {
   const { loading, data, error , isError } = useGetMessagesStatsQuery('')
+  console.log(data);
 
   useErrors([
     {
