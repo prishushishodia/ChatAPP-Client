@@ -1,10 +1,1 @@
-
-
-
-export const server = import.meta.env.VITE_SERVER;
-
-
-// fixing the remove alert
-// fixing socket disconnect
-// fixing mobile view
-
+export const server = "https://chatapp-server.onrender.com/api/v1";
