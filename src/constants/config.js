@@ -1,1 +1,2 @@
-export const server = "https://chatapp-server.onrender.com/api/v1";
+// src/constants/config.js
+export const server = "https://chatapp-backend-yffv.onrender.com/api/v1";
