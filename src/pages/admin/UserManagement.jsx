@@ -1,9 +1,7 @@
-import { useFetchData } from "6pp";
 import { Avatar, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import Table from "../../components/shared/Table";
-import { server } from "../../constants/config";
 import { useErrors } from "../../hooks/hooks";
 import { transformImage } from "../../lib/features";
 import { useGetUserStatsQuery } from "../../redux/api/api";
@@ -24,7 +22,6 @@ const columns = [
       <Avatar alt={params.row.name} src={params.row.avatar} />
     ),
   },
-
   {
     field: "name",
     headerName: "Name",
@@ -50,16 +47,11 @@ const columns = [
     width: 200,
   },
 ];
+
 const UserManagement = () => {
+  const { loading, data, error, isError } = useGetUserStatsQuery("");
 
-  const {loading , data , error , isError} = useGetUserStatsQuery("")
-
-  useErrors([
-    {
-      isError: isError,
-      error: error,
-    },
-  ]);
+  useErrors([{ isError, error }]);
 
   const [rows, setRows] = useState([]);
 
@@ -77,11 +69,29 @@ const UserManagement = () => {
 
   return (
     <AdminLayout>
-      {loading ? (
-        <Skeleton height={"100vh"} />
-      ) : (
-        <Table heading={"All Users"} columns={columns} rows={rows} />
-      )}
+      <div style={{ backgroundColor: "#121212", minHeight: "100vh", padding: "2rem", color: "#fff" }}>
+        {loading ? (
+          <Skeleton height={"100vh"} sx={{ bgcolor: "#1e1e1e" }} />
+        ) : (
+          <Table
+            heading={"All Users"}
+            columns={columns}
+            rows={rows}
+            sx={{
+              bgcolor: "#1e1e1e",
+              color: "#fff",
+              borderRadius: "1rem",
+              padding: "1rem",
+              "& .table-header": {
+                color: "#00ADEF",
+              },
+              "& .MuiTableCell-root": {
+                borderBottom: "1px solid rgba(255,255,255,0.1)",
+              },
+            }}
+          />
+        )}
+      </div>
     </AdminLayout>
   );
 };

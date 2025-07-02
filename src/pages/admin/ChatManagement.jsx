@@ -1,13 +1,11 @@
-import { useFetchData } from "6pp";
 import { Avatar, Skeleton, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AvatarCard from "../../components/shared/AvatarCard";
 import Table from "../../components/shared/Table";
-import { server } from "../../constants/config";
+import { useGetChatsStatsQuery } from "../../redux/api/api";
 import { useErrors } from "../../hooks/hooks";
 import { transformImage } from "../../lib/features";
-import { useGetChatsStatsQuery } from "../../redux/api/api";
 
 const columns = [
   {
@@ -23,14 +21,12 @@ const columns = [
     width: 150,
     renderCell: (params) => <AvatarCard avatar={params.row.avatar} />,
   },
-
   {
     field: "name",
     headerName: "Name",
     headerClassName: "table-header",
     width: 300,
   },
-
   {
     field: "groupChat",
     headerName: "Group",
@@ -65,15 +61,19 @@ const columns = [
     width: 250,
     renderCell: (params) => (
       <Stack direction="row" alignItems="center" spacing={"1rem"}>
-        <Avatar alt={params.row.creator.name} src={params.row.creator.avatar} />
-        <span>{params.row.creator.name}</span>
+        <Avatar
+          alt={params.row.creator.name}
+          src={params.row.creator.avatar}
+          sx={{ width: 30, height: 30 }}
+        />
+        <span style={{ color: "#fff" }}>{params.row.creator.name}</span>
       </Stack>
     ),
   },
 ];
 
 const ChatManagement = () => {
-  const { loading, data, error , isError } = useGetChatsStatsQuery('')
+  const { loading, data, error, isError } = useGetChatsStatsQuery("");
 
   useErrors([
     {
@@ -103,11 +103,33 @@ const ChatManagement = () => {
 
   return (
     <AdminLayout>
-      {loading ? (
-        <Skeleton height={"100vh"} />
-      ) : (
-        <Table heading={"All Chats"} columns={columns} rows={rows} />
-      )}
+      <div
+        style={{
+          backgroundColor: "#121212",
+          minHeight: "100vh",
+          padding: "2rem",
+          color: "#fff",
+        }}
+      >
+        {loading ? (
+          <Skeleton height={"100vh"} sx={{ bgcolor: "#1e1e1e" }} />
+        ) : (
+          <Table
+            heading="All Chats"
+            columns={columns}
+            rows={rows}
+            sx={{
+              backgroundColor: "#1e1e1e",
+              color: "#fff",
+              "& .table-header": {
+                backgroundColor: "#1e1e1e",
+                color: "#00ADEF",
+                fontWeight: "bold",
+              },
+            }}
+          />
+        )}
+      </div>
     </AdminLayout>
   );
 };

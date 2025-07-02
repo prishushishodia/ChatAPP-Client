@@ -1,64 +1,111 @@
-
-import React , {useEffect} from 'react'
-import {  useInputValidation } from "6pp";
-import {Container ,Avatar,  IconButton, Paper ,Stack, Typography , TextField, Button} from '@mui/material'
-import {bgcolour} from '../../constants/colors.js'
-import { Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useInputValidation } from "6pp";
+import {
+  Container,
+  Paper,
+  Stack,
+  Typography,
+  TextField,
+  Button,
+} from "@mui/material";
+import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { adminLogin, getAdmin } from "../../redux/thunk/admin";
 
-
 const AdminLogin = () => {
+  const { isAdmin } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-const { isAdmin } = useSelector((state) => state.auth);
-const dispatch = useDispatch();
+  const secretKey = useInputValidation("");
 
-const secretKey = useInputValidation("");
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(adminLogin(secretKey.value));
+  };
 
+  useEffect(() => {
+    dispatch(getAdmin());
+  }, [dispatch]);
 
-const handleLogin = (e) => {
-  e.preventDefault();
-  dispatch(adminLogin(secretKey.value));
-}
+  if (isAdmin) return <Navigate to="/admin/dashboard" />;
 
-useEffect(() => {
-  dispatch(getAdmin());
-}, [dispatch]);
-
-if (isAdmin) return <Navigate to="/admin/dashboard" />;
-
-
-if(isAdmin) return <Navigate to="/admin/dashboard"/>
   return (
-    <div style={ {backgroundImage : bgcolour}}>
-    <Container maxWidth="xs" component={"main"} sx={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}>   
-    <Paper elevation={3} 
-    sx={{
-        padding: 4, display: "flex",flexDirection: "column",alignItems: "center"
-      }}> 
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#121212",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Container maxWidth="xs">
+        <Paper
+          elevation={4}
+          sx={{
+            p: 4,
+            borderRadius: 3,
+            backgroundColor: "#1e1e1e",
+            boxShadow: "0 0 20px rgba(0, 123, 255, 0.3)",
+          }}
+        >
+          <Stack spacing={3} alignItems="center">
+            <Typography
+              variant="h4"
+              fontWeight="bold"
+              color="#00ADEF"
+              textAlign="center"
+            >
+              Admin Login
+            </Typography>
 
-          <Typography variant="h4" sx={{mb:2}}>Admin Login</Typography>
-            <form style={{width: "100%" , marginTop:1}} onSubmit={handleLogin}> 
-                <TextField
+            <form onSubmit={handleLogin} style={{ width: "100%" }}>
+              <TextField
                 required
                 fullWidth
-                margin='normal'
-                label="SECRET KEY"
-                type='password'
+                margin="normal"
+                label="Secret Key"
+                type="password"
                 variant="outlined"
                 value={secretKey.value}
                 onChange={secretKey.changeHandler}
-                ></TextField>
+                InputProps={{
+                  style: { color: "#fff" },
+                }}
+                InputLabelProps={{
+                  style: { color: "#888" },
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": { borderColor: "#333" },
+                    "&:hover fieldset": { borderColor: "#00ADEF" },
+                    "&.Mui-focused fieldset": { borderColor: "#00ADEF" },
+                  },
+                }}
+              />
 
-
-                <Button sx={{marginTop: 2}} variant="contained" color="primary" fullWidth  type="submit">
-                    Login
-                </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  backgroundColor: "#00ADEF",
+                  color: "#fff",
+                  fontWeight: "bold",
+                  ":hover": {
+                    backgroundColor: "#007bbd",
+                  },
+                }}
+              >
+                Login
+              </Button>
             </form>
-     </Paper>
-         </Container>
-         </div>
-  )
-}
+          </Stack>
+        </Paper>
+      </Container>
+    </div>
+  );
+};
 
-export default AdminLogin
+export default AdminLogin;
