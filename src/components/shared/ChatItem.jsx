@@ -1,67 +1,78 @@
-import { Box, Typography } from "@mui/material"
-import { Link } from "../styles/StyledComponent"
-import Stack from '@mui/material/Stack'
-import { memo } from "react"
-import AvatarCard from "./AvatarCard"
-import {motion} from "framer-motion"
-
+import { Box, Typography } from "@mui/material";
+import { Link } from "../styles/StyledComponent";
+import Stack from "@mui/material/Stack";
+import { memo } from "react";
+import AvatarCard from "./AvatarCard";
+import { motion } from "framer-motion";
 
 const ChatItem = ({
-    avatar = [],
-    name,
-    _id,
-    groupChat = false,
-    sameSender,
-    isOnline,
-    newMessageAlert,
-    index = 0,
-    handleDeleteChat,
-  }) => {
+  avatar = [],
+  name,
+  _id,
+  groupChat = false,
+  sameSender,
+  isOnline,
+  newMessageAlert,
+  index = 0,
+  handleDeleteChat,
+}) => {
   return (
-
-        <Link to={`/chat/${_id}`} 
-            sx={{
-                padding: "0",
-            }}
-            onContextMenu={(e) => handleDeleteChat(e, _id , groupChat)}>
-
-        <motion.div 
-        initial={{ opacity: 0, y: "-100%" }}
+    <Link
+      to={`/chat/${_id}`}
+      sx={{
+        p: 0,
+        display: "block",
+        textDecoration: "none",
+      }}
+      onContextMenu={(e) => handleDeleteChat(e, _id, groupChat)}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 * index }}
-        style={{display: "flex",
-                gap: "1rem",
-                alignItems: "center",
-                backgroundColor: sameSender ? "black" : "unset",
-                color: sameSender ? "white" : "unset",
-                position: "relative",
-                padding: "1rem",
-                paddingRight:"1rem"
+        transition={{ delay: 0.05 * index }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1rem",
+          backgroundColor: sameSender ? "#1a1a2e" : "transparent",
+          color: sameSender ? "#fff" : "#ccc",
+          padding: "0.75rem 1rem",
+          borderBottom: "1px solid #1a1a1a",
+          cursor: "pointer",
+          position: "relative",
+          transition: "background-color 0.3s ease",
+        }}
+      >
+        <AvatarCard avatar={avatar} />
 
-                }}>
-                
-            
-            <AvatarCard avatar={avatar} />
-       
-                <Stack>
-                <Typography>{name}</Typography>
-                {
-                    newMessageAlert && (
-                        <Typography>{newMessageAlert.count} New Messsages</Typography>
-                    )
-                }
-                </Stack>
-                    
-            {isOnline && <Box sx={{ width: "10px",
-              height: "10px",
+        <Stack spacing={0.5}>
+          <Typography fontWeight="bold" color="#fff">
+            {name}
+          </Typography>
+          {newMessageAlert && (
+            <Typography variant="caption" color="#2196F3">
+              {newMessageAlert.count} New Message{newMessageAlert.count > 1 && "s"}
+            </Typography>
+          )}
+        </Stack>
+
+        {isOnline && (
+          <Box
+            sx={{
+              width: 10,
+              height: 10,
               borderRadius: "50%",
-              backgroundColor: "green",
+              backgroundColor: "#00FF00",
               position: "absolute",
-              top: "50%",
               right: "1rem",
-              transform: "translateY(-50%)"}}/>}
- </motion.div>
-        </Link>
-    )
-  }
-export default memo(ChatItem)
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+          />
+        )}
+      </motion.div>
+    </Link>
+  );
+};
+
+export default memo(ChatItem);
