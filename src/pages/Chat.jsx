@@ -237,3 +237,4 @@ function Chat({ chatId }) {
 }
 
 export default AppLayout()(Chat);
+
