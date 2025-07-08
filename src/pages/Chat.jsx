@@ -161,13 +161,13 @@ function Chat({ chatId }) {
         ref={containerRef}
         padding="1rem"
         spacing="1rem"
-        bgcolor="#121212"
+        bgcolor="#111B21"
         height="90%"
         sx={{
           overflowX: "hidden",
           overflowY: "auto",
           borderRadius: "0.5rem",
-          border: "1px solid #222",
+          border: "1px solid #1E2A30",
         }}
       >
         {allMessages.map((i) => (
@@ -186,8 +186,8 @@ function Chat({ chatId }) {
           alignItems="center"
           position="relative"
           sx={{
-            backgroundColor: "#1a1a1a",
-            borderTop: "1px solid #333",
+            backgroundColor: "#1E2A30",
+            borderTop: "1px solid #2A3942",
           }}
         >
           <IconButton
@@ -195,7 +195,7 @@ function Chat({ chatId }) {
               position: "absolute",
               left: "1.5rem",
               rotate: "30deg",
-              color: "#00A3FF",
+              color: "#8696A0",
             }}
             onClick={handleFileOpen}
           >
@@ -207,11 +207,11 @@ function Chat({ chatId }) {
             value={message}
             onChange={messageOnChange}
             sx={{
-              background: "#222",
-              color: "white",
+              background: "#2A3942",
+              color: "#E9EDEF",
               pl: "3rem",
               borderRadius: "2rem",
-              input: { color: "white" },
+              input: { color: "#E9EDEF" },
             }}
           />
 
@@ -219,11 +219,11 @@ function Chat({ chatId }) {
             type="submit"
             sx={{
               rotate: "-30deg",
-              background: "linear-gradient(90deg, #00A3FF, #0062cc)",
+              background: "#005C4B",
               color: "white",
               marginLeft: "1rem",
               padding: "0.5rem",
-              ":hover": { opacity: 0.9 },
+              ":hover": { background: "#0b5141" },
             }}
           >
             <SendIcon />
@@ -237,4 +237,3 @@ function Chat({ chatId }) {
 }
 
 export default AppLayout()(Chat);
-

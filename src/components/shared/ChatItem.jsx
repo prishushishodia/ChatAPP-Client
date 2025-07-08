@@ -20,7 +20,6 @@ const ChatItem = ({
     <Link
       to={`/chat/${_id}`}
       sx={{
-        p: 0,
         display: "block",
         textDecoration: "none",
       }}
@@ -35,9 +34,9 @@ const ChatItem = ({
           alignItems: "center",
           gap: "1rem",
           backgroundColor: sameSender ? "#1a1a2e" : "transparent",
-          color: sameSender ? "#fff" : "#ccc",
+          color: "#e0e0e0",
           padding: "0.75rem 1rem",
-          borderBottom: "1px solid #1a1a1a",
+          borderBottom: "1px solid #2c2c3a",
           cursor: "pointer",
           position: "relative",
           transition: "background-color 0.3s ease",
@@ -45,10 +44,11 @@ const ChatItem = ({
       >
         <AvatarCard avatar={avatar} />
 
-        <Stack spacing={0.5}>
-          <Typography fontWeight="bold" color="#fff">
+        <Stack spacing={0.3}>
+          <Typography fontWeight="bold" color="#ffffff">
             {name}
           </Typography>
+
           {newMessageAlert && (
             <Typography variant="caption" color="#2196F3">
               {newMessageAlert.count} New Message{newMessageAlert.count > 1 && "s"}

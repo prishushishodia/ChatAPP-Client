@@ -1,46 +1,3 @@
-// import React from "react";
-// import AppLayout from "../components/layout/AppLayout";
-// import { Box, Typography } from "@mui/material";
-
-// const Home = () => {
-//   return (
-//     <Box
-//       bgcolor="#121212"
-//       height="100%"
-//       display="flex"
-//       alignItems="center"
-//       justifyContent="center"
-//       flexDirection="column"
-//       sx={{
-//         color: "white",
-//         borderRadius: "0.5rem",
-//         border: "1px solid #222",
-//         padding: "2rem",
-//       }}
-//     >
-//       <Typography
-//         variant="h4"
-//         textAlign="center"
-//         sx={{
-//           background: "linear-gradient(90deg, #00A3FF, #0062cc)",
-//           WebkitBackgroundClip: "text",
-//           WebkitTextFillColor: "transparent",
-//           fontWeight: "bold",
-//           mb: "1rem",
-//         }}
-//       >
-//         Welcome to ChatApp
-//       </Typography>
-
-//       <Typography variant="h6" textAlign="center" color="#bbb">
-//         Select a friend to start chatting
-//       </Typography>
-//     </Box>
-//   );
-// };
-
-// export default AppLayout()(Home);
-
 import React from "react";
 import AppLayout from "../components/layout/AppLayout";
 import { Box, Typography } from "@mui/material";
@@ -48,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 const Home = () => {
   return (
     <Box
-      bgcolor="#f5efe6" // soft beige background
+      bgcolor="#111B21" // WhatsApp dark background
       height="100%"
       display="flex"
       alignItems="center"
@@ -58,11 +15,11 @@ const Home = () => {
     >
       <Box
         sx={{
-          backgroundColor: "#fdf6f0", // lighter beige
+          backgroundColor: "#202C33", // Chat bubble background
           borderRadius: "1rem",
           padding: "3rem",
-          boxShadow: "0 8px 24px rgba(101, 81, 58, 0.15)", // soft brown shadow
-          border: "1px solid #e4d3c2",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)", // dark shadow
+          border: "1px solid #2A3942",
           maxWidth: "520px",
           textAlign: "center",
         }}
@@ -70,30 +27,29 @@ const Home = () => {
         <Typography
           variant="h3"
           sx={{
-            background: "linear-gradient(90deg, #b499c9, #d6c0ec)", // lavender gradient
+            background: "linear-gradient(90deg, #00A884, #25D366)", // WhatsApp green gradient
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             fontWeight: "bold",
             mb: 2,
           }}
         >
-          ✨ Welcome to ChatApp
+          👋 Welcome to Dribble <p>Real Time Chatting Application</p> 
         </Typography>
 
         <Typography
           variant="h6"
           sx={{
-            color: "#7a5c3e", // soft brown text
+            color: "#E9EDEF", // WhatsApp text
             fontSize: "1.1rem",
             mb: 1,
           }}
         >
-          Cozy chats, beautiful vibes 
+          Simple. Secure. Reliable messaging.
         </Typography>
 
-        <Typography variant="body1" sx={{ color: "#8c7e72" }}>
-          Select a friend from the sidebar and start a lovely conversation in
-          this calming space.
+        <Typography variant="body1" sx={{ color: "#8696A0" }}>
+          Choose a conversation from the sidebar or start a new one. Your chats are end-to-end encrypted and always in sync.
         </Typography>
       </Box>
     </Box>
